@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    margin: 0;
+    background-color: rgba(2, 115, 6, 1);
+    font-family: 'Barlow', "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+}
+
+p {
+    cursor: default;
+}
+
+h3 {
+    cursor: default;
+}
+
+.logoWS {
+    width: 107px;
+    padding-left: 43px;
+    padding-top: 33px;
+}
+
+.cardCadastro {
+    width: 421px;
+    height: 532px;
+    border-radius: 46px;
+    background-color: rgba(255, 255, 255, 0.8);
+    margin-left: 25%;
+    margin-top: 42px;
+    display: flex;
+}
+
+.cardCadastro .campos {
+    width: 400px;
+    height: 500px;
+    margin: 25px;
+    margin-top: 5px;
+    line-height: 20px;
+}
+
+.cardCadastro h3{
+    font-size: 32px;
+    font-weight: 400;
+    color: rgba(29, 88, 1, 1);
+    margin-left: 10px;
+}
+
+p {
+    font-size: 18px;
+    color: rgba(29, 88, 1, 1);
+    line-height: 15px;
+}
+
+input {
+    width: 370px;
+    height: 35px;
+    border-radius: 20px 0px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+    border: 0 none;
+    outline: 0;
+    border-bottom: 2px solid rgba(60, 187, 0, 1);
+    padding: 10px;
+    caret-color: rgba(60, 187, 0, 1);
+}
+
+.campos p a {
+    padding-top: 10px;
+    text-decoration: none;
+    color: rgba(14, 54, 0, 1);
+    font-size: 14px;
+}
+
+.campos p a:hover {
+    text-decoration: underline;
+}
+
+.campos button {
+    background-color: rgba(60, 187, 0, 1);
+    border: 0 none;
+    color: #fff;
+    width: 90px;
+    height: 40px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-left: 140px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.campos button:hover {
+    transition: 1s;
+    background-color: rgba(14, 54, 0, 1);
+}
+
+.loading {
+    width: 120px;
+    height: 75px;
+    display: none;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: 50%;
+    margin-left: 35%;
+}
+
+.loading span {
+    font-size: 22px;
+    text-transform: uppercase;
+    margin: auto;
+    color: rgba(14, 54, 0, 1);
+}
+
+.ball {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: rgba(14, 54, 0, 1);
+    animation: bounce .5s alternate infinite;
+}
+
+.ball:nth-child(2) {
+    animation-delay: .16s;
+}
+
+.ball:nth-child(3) {
+    animation-delay: .32s;
+}
+
+@keyframes bounce {
+    from {
+        transform: scaleX(1.25);
+    }
+    to {
+        transform: translateY(-50px) scaleX(1);
+    }
+}

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CADASTRO - WEBSOCCER</title>
+
+    <script src="./js/funcoes.js"></script>
+
+    <link rel="icon" href="./assets/icon/logoWebSoccer.png">
+    <link rel="stylesheet" href="./css/cadastro.css">
+</head>
+
+    <body>
+
+        <div class="areaLogo">
+            <a href="index.html"><img class="logoWS" src="./assets/imgs/logoWebSoccer.png" alt=""></a> 
+        </div>
+
+        <div class="cardCadastro">
+            <div id="div_campos" class="campos">
+                <h3>Faça parte do nosso time!</h3>
+                <p>Nome</p>
+                <input id="nome_input" placeholder="nome completo">
+                <p>E-mail</p>
+                <input id="email_input" placeholder="nome@email.com">
+                <p>Senha</p>
+                <input type="password" id="senha_input" placeholder="*********">
+                <p>Confirmar Senha</p>
+                <input type="password" id="confirmarSenha_input" placeholder="*********"> 
+                <p><a href="login.html">Já tem uma conta?</a></p> 
+                <button onclick="cadastrar()">Cadastrar</button>
+            </div>
+            <div id="div_aguardar" class="loading">
+                <div class="ball"></div>
+                <div class="ball"></div>
+                <div class="ball"></div>
+                <span>Carregando...</span>
+            </div>
+        </div>
+
+    </body>
+
+</html>
+<script>
+
+function cadastrar() {
+        aguardar();
+
+        var nomeVar = nome_input.value;
+        var emailVar = email_input.value;
+        var senhaVar = senha_input.value;
+        var confirmarSenhaVar = confirmarSenha_input.value;
+        var pontuacaoVar = 0;
+        var qtdAcertosVar = 0;
+        var qtdErrosVar = 0;
+
+        if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmarSenhaVar == "") {
+            alert("ERRO - Campos em branco!");
+
+            finalizarAguardar();
+            return false;
+        }
+
+        if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".com") == -1) {
+            alert("Ops, e-mail inválido! Verifique e tente novamente.");
+            finalizarAguardar();
+            return false;
+        }
+
+        if (senhaVar != confirmarSenhaVar) {
+            alert("Ops, as senhas tem que ser iguais! Verifique e tente novamente.");
+            finalizarAguardar();
+            return false;
+        }
+
+        if (senhaVar.length < 5) {
+            alert("Ops, a senha é muito pequena! Tente novamente.");
+            finalizarAguardar();
+            return false;
+        }
+
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nomeServer: nomeVar,
+                emailServer: emailVar,
+                senhaServer: senhaVar,
+                pontuacaoServer: pontuacaoVar,
+                qtdAcertosServer: qtdAcertosVar,
+                qtdErrosServer: qtdErrosVar
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                alert("Cadastro realizado com sucesso! Redirecionando para tela de Login...");
+
+                setTimeout(() => {
+                    window.location = "login.html";
+                }, "2000")
+                
+            } else {
+                alert("Houve um erro ao tentar realizar o cadastro!");
+                finalizarAguardar();
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+        });
+        
+        return false;
+    }
+
+</script>

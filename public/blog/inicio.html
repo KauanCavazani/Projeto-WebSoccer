@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INICIO - WEBSOCCER</title>
+
+    <script src="../js/funcoes.js"></script>
+
+    <link rel="icon" href="../assets/icon/logoWebSoccer.png">
+    <link rel="stylesheet" href="./css/inicio.css">
+</head>
+
+    <body onload="validarSessao()">
+
+        <div class="header">
+            <div class="container">
+                <div class="voltar" onclick="limparSessao()">
+                    <img src="../assets/imgs/blog/back.png" alt="">
+                </div>
+                <div class="usuario">
+                    <div class="fotoUsuario">
+                        <img src="../assets/imgs/blog/usuario.png" alt="">
+                    </div>
+                    <span id="b_usuario">Usuario</span>
+                </div>
+                <div class="pontuacao">
+                    Pontuação: <span id="b_pontuacao">0</span>
+                </div>
+            </div>
+        </div>
+        <div class="titulo">
+            <p>Escolha seu time favorito!</p>
+        </div>
+        <div class="escolhaTimes">
+            <div class="container">
+                <a href="blogSPFC.html">
+                    <div class="card">
+                        <img class="spfc" src="../assets/imgs/blog/saopaulo.png" alt="">
+                        <p>São Paulo FC</p>
+                    </div>
+                </a>
+                <a href="blogLFC.html">
+                    <div class="card">
+                        <img class="lfc" src="../assets/imgs/blog/liverpool.png" alt="">
+                        <p>Liverpool FC</p>
+                    </div>
+                </a>
+                <a href="blogBFC.html">
+                    <div class="card">
+                        <img class="bfc" src="../assets/imgs/blog/barcelona.png" alt="">
+                        <p>Barcelona FC</p>
+                    </div>
+                </a>
+                <a href="blogACM.html">
+                    <div class="card">
+                        <img class="acm" src="../assets/imgs/blog/milan.png" alt="">
+                        <p class="p_amc">AC Milan</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    </body>
+
+</html>

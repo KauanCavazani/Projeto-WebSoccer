@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN - WEBSOCCER</title>
+
+    <script src="./js/funcoes.js"></script>
+
+    <link rel="icon" href="./assets/icon/logoWebSoccer.png">
+    <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" href="./css/cadastro.css">
+</head>
+
+    <body>
+
+        <div class="areaLogo">
+            <a href="index.html"><img class="logoWS" src="./assets/imgs/logoWebSoccer.png" alt=""></a> 
+        </div>
+
+        <div class="cardLogin">
+            <div id="div_campos" class="campos">
+                <h3>Bem vindo(a) de volta!</h3>
+                <p>E-mail</p>
+                <input id="email_input" placeholder="nome@email.com">
+                <p>Senha</p>
+                <input type="password" id="senha_input" placeholder="*********">
+                <p><a href="cadastro.html">Ainda não tem uma conta?</a></p> 
+                <button onclick="entrar()">Entrar</button>
+            </div>
+            <div id="div_aguardar" class="loading">
+                <div class="ball"></div>
+                <div class="ball"></div>
+                <div class="ball"></div>
+                <span>Carregando...</span>
+            </div>
+        </div>
+
+    </body>
+
+</html>
+<script>
+
+function entrar() {
+        aguardar();
+
+        var emailVar = email_input.value;
+        var senhaVar = senha_input.value;
+
+        if (emailVar == "" || senhaVar == "") {
+            alert("Preencha todos os campos para prosseguir!");
+            finalizarAguardar();
+            return false;
+        }
+
+        if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".com") == -1) {
+            alert("Ops, e-mail inválido! Verifique e tente novamente.");
+            finalizarAguardar();
+            return false;
+        }
+
+        if (senhaVar.length < 5) {
+            alert("Ops, a senha é muito pequena! Verifique e tente novamente.");
+            finalizarAguardar();
+            return false;
+        }
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+                    sessionStorage.PONTUACAO_USUARIO = json.pontuacao;
+                    sessionStorage.QTDACERTOS_USUARIO = json.qtdAcertos;
+                    sessionStorage.QTDERROS_USUARIO = json.qtdErros;
+
+                    setTimeout(function () {
+                        window.location = "./blog/inicio.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+                alert("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar();
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+}
+
+</script>

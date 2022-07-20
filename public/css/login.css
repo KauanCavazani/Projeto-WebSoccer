@@ -1,0 +1,38 @@
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #027306;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(230, 230, 230);
+    border-radius: 50px;
+}
+
+.cardLogin {
+    width: 421px;
+    height: 365px;
+    border-radius: 46px;
+    background-color: rgba(255, 255, 255, 0.8);
+    margin-left: 25%;
+    margin-top: 126px;
+}
+
+.cardLogin .campos {
+    width: 400px;
+    margin: 25px;
+    line-height: 20px;
+}
+
+.cardLogin h3{
+    font-size: 32px;
+    font-weight: 400;
+    color: rgba(29, 88, 1, 1);
+    margin-left: 34px;
+}
+
+.cardLogin .loading {
+    margin-top: 36%;
+}

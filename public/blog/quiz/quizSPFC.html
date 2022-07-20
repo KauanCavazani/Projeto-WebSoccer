@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZ - WEBSOCCER</title>
+
+    <script src="./funcoesQuiz.js"></script>
+
+    <link rel="icon" href="./assets/icon/logoWebSoccer.png">
+    <link rel="stylesheet" href="../css/quiz.css">
+</head>
+
+    <body onload="validarSessao()">
+
+        <div class="pontuacao">
+            Pontuação: <span id="b_pontuacao"></span>
+        </div>
+
+        <div class="cardPerguntas">
+            <div id="div_perguntas" class="campos">
+                <div id="btn" class="btn">
+                    <h3 class="inicio">Aperte o botão para começar</h3> <br>
+                    <button onclick="start()" class="botao">Começar</button>
+                </div>  
+                <div id="divPerguntas" class="perguntas">
+                    <div class="tituloQuestao">
+                        <h3 id="questao">Questão aqui</h3>
+                    </div>
+                    <div class="opcoes">
+                        <button class="opcao" id="op1" value="0">Opção 1</button>
+                        <button class="opcao" id="op2" value="1">Opção 2</button>
+                        <button class="opcao" id="op3" value="2">Opção 3</button>
+                        <button class="opcao" id="op4" value="3">Opção 4</button>
+                    </div>
+                    <button class="botao" id="botao">Confirmar</button>
+                </div>
+                <div class="resultados" id="resultados">
+                    <h3 class="questao">Resultado</h3>
+                    <p>Quantidade de pontos: <span id="resultadoPontos">0</span></p>
+                    <p>Quantidade de acertos: <span id="resultadoAcertos">0</span></p>
+                    <p>Quantidade de erros: <span id="resultadoErros">0</span></p>
+                    <button class="botao" onclick="voltar()">Voltar</button>
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+</html>
+<script>
+
+    var questoes = [
+        {
+            id: 0,
+            pergunta: 'Em que ano o São Paulo foi fundado?',
+            alternativas: [
+                {opt: '1929'},
+                {opt: '1925'},
+                {opt: '1930'},
+                {opt: '1928'}
+            ],
+            resposta: '2',
+        },
+        {
+            id: 1,
+            pergunta: 'Quantos mundiais o São Paulo tem?',
+            alternativas: [
+                {opt: '1'},
+                {opt: '3'},
+                {opt: '2'},
+                {opt: '0'}
+            ],
+            resposta: '1',
+        },
+        {
+            id: 2,
+            pergunta: 'Qual desses jogadores é idolo do São Paulo?',
+            alternativas: [
+                {opt: 'Pablo'},
+                {opt: 'Rodrigo Caio'},
+                {opt: 'Hudson'},
+                {opt: 'Raí'}
+            ],
+            resposta: '3',
+        },
+        {
+            id: 3,
+            pergunta: 'Em que estádio o São Paulo joga?',
+            alternativas: [
+                {opt: 'Morumbi'},
+                {opt: 'Pacaembu'},
+                {opt: 'Canindé'},
+                {opt: 'Maracanã'}
+            ],
+            resposta: '0',
+        },
+        {
+            id: 4,
+            pergunta: 'Quais são as cores do São Paulo',
+            alternativas: [
+                {opt: 'Vermelho, azul e preto'},
+                {opt: 'Vermelho e preto'},
+                {opt: 'Vermelho, branco e preto'},
+                {opt: 'Branco'}
+            ],
+            resposta: '2',
+        },
+    ];
+
+    var pontos = Number(sessionStorage.PONTUACAO_USUARIO);
+    var qtdAcertos = 0;
+    var qtdErros = 0;
+
+    function questionario(id) {
+        var questao = document.getElementById('questao');
+        questao.innerText = questoes[id].pergunta;
+
+        var op1 = document.getElementById('op1');
+        var op2 = document.getElementById('op2');
+        var op3 = document.getElementById('op3');
+        var op4 = document.getElementById('op4');
+
+        op1.innerText = questoes[id].alternativas[0].opt;
+        op2.innerText = questoes[id].alternativas[1].opt;
+        op3.innerText = questoes[id].alternativas[2].opt;
+        op4.innerText = questoes[id].alternativas[3].opt;
+
+        var selecionado = "";
+
+        op1.addEventListener("click", () => {
+            selecionado = "";
+            op1.style.backgroundColor = "rgba(14, 54, 0, 1)";
+            op2.style.backgroundColor = "rgba(60, 187, 0, 1)";
+            op3.style.backgroundColor = "rgba(60, 187, 0, 1)";
+            op4.style.backgroundColor = "rgba(60, 187, 0, 1)";
+            selecionado = op1.value;
+        })
+
+        op2.addEventListener("click", () => {
+            selecionado = "";
+            op1.style.backgroundColor = "rgba(60, 187, 0, 1)";
+            op2.style.backgroundColor = "rgba(14, 54, 0, 1)";
+            op3.style.backgroundColor = "rgba(60, 187, 0, 1)";
+            op4.style.backgroundColor = "rgba(60, 187, 0, 1)";
+            selecionado = op2.value;
+        })
+
+        op3.addEventListener("click", () => {
+            selecionado = "";
+            op1.style.backgroundColor = "rgba(60, 187, 0, 1)";
+            op2.style.backgroundColor = "rgba(60, 187, 0, 1)";
+            op3.style.backgroundColor = "rgba(14, 54, 0, 1)";
+            op4.style.backgroundColor = "rgba(60, 187, 0, 1)";
+            selecionado = op3.value;
+        })
+
+        op4.addEventListener("click", () => {
+            selecionado = "";
+            op1.style.backgroundColor = "rgba(60, 187, 0, 1)";
+            op2.style.backgroundColor = "rgba(60, 187, 0, 1)";
+            op3.style.backgroundColor = "rgba(60, 187, 0, 1)";
+            op4.style.backgroundColor = "rgba(14, 54, 0, 1)";
+            selecionado = op4.value;
+        })
+
+        var confirmar = document.getElementById('botao');
+        var areaPnts = document.getElementById('b_pontuacao');        
+
+    confirmar.addEventListener("click", () => {
+        if(selecionado == questoes[id].resposta) {
+            pontos += 10;
+            qtdAcertos++;
+            areaPnts.innerHTML = pontos;
+            console.log('Acertos: ' + qtdAcertos)
+            console.log('acertou!')
+        } else {
+            qtdErros++;
+            console.log('erros: ' + qtdErros)
+            console.log('errou!')
+        }
+        console.log(pontos)
+        avancar(id, pontos, qtdAcertos, qtdErros);
+    })
+
+        fetch("/usuarios/savePontos", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                pontuacaoServer: pontos,
+                qtdAcertosServer: qtdAcertos,
+                qtdErrosServer: qtdErros,
+                idUsuarioServer: sessionStorage.ID_USUARIO,
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: " + resposta);
+
+            if (resposta.ok) {
+
+                setTimeout(() => {
+                    console.log('pontos att');
+                }, "2000")
+                
+            } else {
+                alert("Houve um erro ao tentar att os pontos!");    
+            }
+            }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+
+            });
+        
+        return false;
+    }
+
+    function check(){
+        if(start) {
+            questionario("0");
+        }
+    }   
+
+    function avancar(id, pontos, acertos, erros) {
+        start = false;
+        if (id < 4) {
+            id++;
+            questionario(id);
+            console.log(id);
+        } else {
+            torcida.play();
+            var divPerguntas = document.getElementById('divPerguntas');
+            var resultados = document.getElementById('resultados');
+            var resultadoPontos = document.getElementById('resultadoPontos');
+            var resultadoAcertos = document.getElementById('resultadoAcertos');
+            var resultadoErros = document.getElementById('resultadoErros');
+            divPerguntas.style.display = 'none';
+            resultados.style.display = 'block';
+            resultadoPontos.innerHTML = pontos;
+            resultadoAcertos.innerHTML = acertos;
+            resultadoErros.innerHTML = erros;
+        }
+    }
+
+    function voltar() {
+        window.location = "../blogSPFC.html";
+    }
+
+</script>
