@@ -35,8 +35,6 @@ function aguardar() {
     divAguardar.style.display = "flex";
 }
 
-
-
 function finalizarAguardar() {
     var divAguardar = document.getElementById("div_aguardar");
     var divCampos = document.getElementById("div_campos");
