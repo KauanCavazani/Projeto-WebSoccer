@@ -6,13 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QUIZ - WEBSOCCER</title>
 
-    <script src="./funcoesQuiz.js"></script>
-
     <link rel="icon" href="./assets/icon/logoWebSoccer.png">
     <link rel="stylesheet" href="../css/quiz.css">
 </head>
 
-    <body onload="validarSessao()">
+    <body>
 
         <div class="pontuacao">
             Pontuação: <span id="b_pontuacao"></span>
@@ -49,65 +47,9 @@
     </body>
 
 </html>
+<script src="./js/funcoesQuiz.js"></script>
+<script src="./js/questoes.js"></script>
 <script>
-
-    var questoes = [
-        {
-            id: 0,
-            pergunta: 'Quem fundou o Barcelona?',
-            alternativas: [
-                {opt: 'Cruyf'},
-                {opt: 'Guardiola'},
-                {opt: 'Joan Gamper'},
-                {opt: 'Lionel Messi'}
-            ],
-            resposta: '2',
-        },
-        {
-            id: 1,
-            pergunta: 'Em que temporada o Barcelona ganhou a primeira La Liga?',
-            alternativas: [
-                {opt: '1928/1929'},
-                {opt: '1930/1931'},
-                {opt: '1940/1941'},
-                {opt: '1923/1934'}
-            ],
-            resposta: '0',
-        },
-        {
-            id: 2,
-            pergunta: 'Quantas Champions League o Barcelona tem?',
-            alternativas: [
-                {opt: '7'},
-                {opt: '14'},
-                {opt: '4'},
-                {opt: '5'}
-            ],
-            resposta: '3',
-        },
-        {
-            id: 3,
-            pergunta: 'Qual desses é o melhor jogador da história do Barcelona?',
-            alternativas: [
-                {opt: 'Ronaldinho'},
-                {opt: 'Ronaldo'},
-                {opt: 'Lionel Messi'},
-                {opt: 'Pique'}
-            ],
-            resposta: '2',
-        },
-        {
-            id: 4,
-            pergunta: 'O último titulo de Champions League do Barcelona foi contra:',
-            alternativas: [
-                {opt: 'Juventus'},
-                {opt: 'Liverpool'},
-                {opt: 'Real Madrid'},
-                {opt: 'Bayer'}
-            ],
-            resposta: '0',
-        },
-    ];
 
     var pontos = Number(sessionStorage.PONTUACAO_USUARIO);
     var qtdAcertos = 0;
@@ -165,83 +107,6 @@
             selecionado = op4.value;
         })
 
-        var confirmar = document.getElementById('botao');
-        var areaPnts = document.getElementById('b_pontuacao');        
-
-    confirmar.addEventListener("click", () => {
-        if(selecionado == questoes[id].resposta) {
-            pontos += 10;
-            qtdAcertos++;
-            areaPnts.innerHTML = pontos;
-            console.log('Acertos: ' + qtdAcertos)
-            console.log('acertou!')
-        } else {
-            qtdErros++;
-            console.log('erros: ' + qtdErros)
-            console.log('errou!')
-        }
-        console.log(pontos)
-        avancar(id, pontos, qtdAcertos, qtdErros);
-    })
-
-        fetch("/usuarios/savePontos", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                pontuacaoServer: pontos,
-                qtdAcertosServer: qtdAcertos,
-                qtdErrosServer: qtdErros,
-                idUsuarioServer: sessionStorage.ID_USUARIO,
-            })
-        }).then(function (resposta) {
-
-            console.log("resposta: " + resposta);
-
-            if (resposta.ok) {
-
-                setTimeout(() => {
-                    console.log('pontos att');
-                }, "2000")
-                
-                } else {
-                    alert("Houve um erro ao tentar att os pontos!");
-                    
-                }
-            }).catch(function (resposta) {
-                console.log(`#ERRO: ${resposta}`);
-
-            });
-        
-        return false;
-    }
-
-    function check(){
-        if(start) {
-            questionario("0");
-        }
-    }   
-
-    function avancar(id, pontos, acertos, erros) {
-        start = false;
-        if (id < 4) {
-            id++;
-            questionario(id);
-            console.log(id);
-        } else {
-            torcida.play();
-            var divPerguntas = document.getElementById('divPerguntas');
-            var resultados = document.getElementById('resultados');
-            var resultadoPontos = document.getElementById('resultadoPontos');
-            var resultadoAcertos = document.getElementById('resultadoAcertos');
-            var resultadoErros = document.getElementById('resultadoErros');
-            divPerguntas.style.display = 'none';
-            resultados.style.display = 'block';
-            resultadoPontos.innerHTML = pontos;
-            resultadoAcertos.innerHTML = acertos;
-            resultadoErros.innerHTML = erros;
-        }
     }
 
     function voltar() {
