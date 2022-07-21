@@ -76,13 +76,12 @@ function cadastrar(req, res) {
 }
 
 function savePontos(req, res) {
-    var pontuacao = req.body.pontuacaoServer;
     var idUsuario = req.body.idUsuarioServer;
+    var pontuacao = req.body.pontuacaoServer;
 
     if (pontuacao == undefined) {
         res.status(400).send("Sua pontuação está undefined!");
     } else {
-        
         usuarioModel.savePontos(pontuacao, idUsuario)
             .then(
                 function (resultado) {

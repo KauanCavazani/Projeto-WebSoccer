@@ -134,6 +134,35 @@ function exibirResultados() {
     spanPontos.innerHTML = pontos;
     spanAcertos.innerHTML = qtdAcertos;
     spanErros.innerHTML = qtdErros;
+
+    atualizarPontuacao();
+}
+
+function atualizarPontuacao() {
+    var idUsuarioVar = sessionStorage.ID_USUARIO;
+    var pontuacaoVar = pontos;
+
+    fetch("/usuarios/savePontos", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            idUsuarioServer: idUsuarioVar,
+            pontuacaoServer: pontuacaoVar,
+        })
+    }).then(function (resposta) {
+
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+            console.log("Pontuação atualizada com sucesso!!");
+        } else {
+            alert("Houve um erro ao tentar atualizar a pontuação!");
+        }
+    }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+    });
 }
 
 
