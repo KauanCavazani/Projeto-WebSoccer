@@ -83,7 +83,7 @@ function savePontos(req, res) {
         res.status(400).send("Sua pontuação está undefined!");
     } else {
         
-        usuarioModel.savePontos(pontuacao, qtdAcertos, qtdErros, idUsuario)
+        usuarioModel.savePontos(pontuacao, idUsuario)
             .then(
                 function (resultado) {
                     res.json(resultado);
