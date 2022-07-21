@@ -22,6 +22,7 @@ function start() {
     botao.style.display = "none";
     divPerguntas.style.display = "block";
 
+    apito.play();
     exibirQuestionario(numeroQuestao);
 }
 
@@ -121,6 +122,8 @@ function verificaResposta(respostaSelecionada) {
 }
 
 function exibirResultados() {
+    torcida.play();
+
     var divPerguntas = document.getElementById("divPerguntas");
     var divResultados = document.getElementById("resultados");
 
