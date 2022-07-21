@@ -141,6 +141,7 @@ function exibirResultados() {
 function atualizarPontuacao() {
     var idUsuarioVar = sessionStorage.ID_USUARIO;
     var pontuacaoVar = pontos;
+    sessionStorage.PONTUACAO_USUARIO = pontos;
 
     fetch("/usuarios/savePontos", {
         method: "POST",
