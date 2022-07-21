@@ -3,17 +3,17 @@ function iniciarSessao() {
     var spanPontuacao = document.getElementById("b_pontuacao");
     var pontuacao = sessionStorage.PONTUACAO_USUARIO;
 
-    spanPontuacao.innerHTML = pontuacao;
+    spanPontuacao.innerText = pontuacao;
 }
 
 // quiz
-
 var apito = new Audio("../css/audio/apitodefutebol.mp3");
 var torcida = new Audio("../css/audio/torcida_efeito_sonoro_toquesengracadosmp3.com.mp3");
 
 var pontos = Number(sessionStorage.PONTUACAO_USUARIO);
 var qtdAcertos = 0;
 var qtdErros = 0;
+var numeroQuestao = 0;
 
 function start() {
     var botao = document.getElementById("btn");
@@ -22,7 +22,7 @@ function start() {
     botao.style.display = "none";
     divPerguntas.style.display = "block";
 
-    exibirQuestionario(0);
+    exibirQuestionario(numeroQuestao);
 }
 
 function exibirQuestionario(id) {
@@ -78,15 +78,62 @@ function exibirQuestionario(id) {
         selecionado = op4.value;
     })
 
+    var clicks = 0;
+
     btnConfirmar.addEventListener("click", () => {
-        selecionado = "";
+        console.log('clicou');
+        clicks++;
         op1.style.backgroundColor = "rgba(60, 187, 0, 1)";
         op2.style.backgroundColor = "rgba(60, 187, 0, 1)";
         op3.style.backgroundColor = "rgba(60, 187, 0, 1)";
         op4.style.backgroundColor = "rgba(60, 187, 0, 1)";
-        selecionado = btnConfirmar.value;
+        if(clicks == 1) {
+            verificaResposta(selecionado);
+            selecionado = "";
+        }
+        selecionado = "";
     })
 
+}
+
+function verificaResposta(respostaSelecionada) {
+    console.log('chamou a função')
+    if(numeroQuestao <= 4) {
+        var spanPontuacao = document.getElementById("b_pontuacao");
+        var respostaCerta = questoes[numeroQuestao].resposta;
+        console.log('entrou')
+        if(respostaSelecionada == respostaCerta) {
+            pontos += 10;
+            qtdAcertos++;
+            spanPontuacao.innerHTML = pontos;
+        } else {
+            qtdErros++;
+        }
+
+        numeroQuestao++;
+        console.log(numeroQuestao)
+        if(numeroQuestao <= 4) {
+            exibirQuestionario(numeroQuestao);
+        } else {
+            exibirResultados();
+        }
+    }
+}
+
+function exibirResultados() {
+    var divPerguntas = document.getElementById("divPerguntas");
+    var divResultados = document.getElementById("resultados");
+
+    divPerguntas.style.display = 'none';
+    divResultados.style.display = 'block'
+
+    var spanPontos = document.getElementById("resultadoPontos");
+    var spanAcertos = document.getElementById("resultadoAcertos");
+    var spanErros = document.getElementById("resultadoErros");
+
+    spanPontos.innerHTML = pontos;
+    spanAcertos.innerHTML = qtdAcertos;
+    spanErros.innerHTML = qtdErros;
 }
 
 

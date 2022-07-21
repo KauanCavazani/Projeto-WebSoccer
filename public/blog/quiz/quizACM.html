@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QUIZ - WEBSOCCER</title>
 
+    <script src="./js/funcoesQuiz.js"></script>
+
     <link rel="icon" href="./assets/icon/logoWebSoccer.png">
     <link rel="stylesheet" href="../css/quiz.css">
 </head>
 
-    <body>
+    <body onload="iniciarSessao()">
 
         <div class="pontuacao">
             Pontuação: <span id="b_pontuacao"></span>
@@ -32,7 +34,7 @@
                         <button class="opcao" id="op3" value="2">Opção 3</button>
                         <button class="opcao" id="op4" value="3">Opção 4</button>
                     </div>
-                    <button class="botao" id="botao">Confirmar</button>
+                    <button class="botao" id="botaoConfirmar">Confirmar</button>
                 </div>
                 <div class="resultados" id="resultados">
                     <h3 class="questao">Resultado</h3>
@@ -47,7 +49,6 @@
     </body>
 
 </html>
-<script src="./js/funcoesQuiz.js"></script>
 <script>
 
     const questoes = [
