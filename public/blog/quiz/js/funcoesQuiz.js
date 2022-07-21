@@ -33,6 +33,7 @@ function exibirQuestionario(id) {
     var op2 = document.getElementById('op2');
     var op3 = document.getElementById('op3');
     var op4 = document.getElementById('op4');
+    var btnConfirmar = document.getElementById('botaoConfirmar');
 
     op1.innerText = questoes[id].alternativas[0].opt;
     op2.innerText = questoes[id].alternativas[1].opt;
@@ -75,6 +76,15 @@ function exibirQuestionario(id) {
         op3.style.backgroundColor = "rgba(60, 187, 0, 1)";
         op4.style.backgroundColor = "rgba(14, 54, 0, 1)";
         selecionado = op4.value;
+    })
+
+    btnConfirmar.addEventListener("click", () => {
+        selecionado = "";
+        op1.style.backgroundColor = "rgba(60, 187, 0, 1)";
+        op2.style.backgroundColor = "rgba(60, 187, 0, 1)";
+        op3.style.backgroundColor = "rgba(60, 187, 0, 1)";
+        op4.style.backgroundColor = "rgba(60, 187, 0, 1)";
+        selecionado = btnConfirmar.value;
     })
 
 }
