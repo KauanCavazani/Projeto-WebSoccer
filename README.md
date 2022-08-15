@@ -16,6 +16,43 @@ A WebSoccer é uma página web sobre futebol onde você consegue acessar fazendo
 
 ![App Screenshot](public/assets/readme/screenshot.png)
 
+## Variáveis de Ambiente
+
+Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de ambiente no seu .env
+
+`MYSQL_HOST`
+
+`MYSQL_USER`
+
+`MYSQL_DATABASE`
+
+`MYSQL_PASSWORD`
+
+## Rodando localmente
+
+Clone o projeto
+
+```bash
+  git clone https://github.com/KauanCavazani/Projeto-WebSoccer.git
+```
+
+Entre no diretório do projeto
+
+```bash
+  cd Projeto-WebSoccer
+```
+
+Instale as dependências
+
+```bash
+  npm install
+```
+
+Inicie o servidor
+
+```bash
+  npm run start
+```
 
 ## Autores
 

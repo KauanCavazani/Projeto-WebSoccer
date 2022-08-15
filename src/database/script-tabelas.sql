@@ -1,4 +1,3 @@
-
 /* para workbench - local - desenvolvimento */
 CREATE DATABASE websoccer;
 
@@ -10,15 +9,4 @@ CREATE TABLE usuario (
 	email VARCHAR(50),
 	senha VARCHAR(50),
 	pontuacao INT,
-	qtdAcertos INT,
-	qtdErros INT
 );
-
--- CREATE TABLE pontuacao (
--- 	idPnts INT PRIMARY KEY AUTO_INCREMENT,
--- 	pontuacao INT,
--- 	qtdAcertos INT,
--- 	qtdErros INT,
--- 	fkIdUsuario INT,
--- 	FOREIGN KEY(fkIdUsuario) REFERENCES usuario(id)
--- )
